@@ -98,9 +98,10 @@ function submitForm(data) {
   newFolder.createFile(pdf);
 
   // 📩 Составляем текст письма
-  const messageText = Object.keys(data)
-    .map((key) => `${key.replace(/([A-Z])/g, " $1")}: ${data[key]}`)
-    .join("\n");
+  const messageText =
+    Object.keys(data)
+      .map((key) => `${key.replace(/([A-Z])/g, " $1")}: ${data[key]}`)
+      .join("\n") + `\n\n📁 Folder link: ${newFolder.getUrl()}`;
 
   // 📧 Email админу
   MailApp.sendEmail({
