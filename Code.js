@@ -1,27 +1,48 @@
-const SHEET_ID = '1fVq4tRVSyk6Dd-NgucS5fbwmwD2RihJon0WKmYhk678';
-const SHEET_NAME = 'database';
-const FOLDER_ID = '1H1EOoXj5t8n3wYvAfd3Vpz6DDVKkYW49'; // папка для файлов
+const SHEET_ID = "1fVq4tRVSyk6Dd-NgucS5fbwmwD2RihJon0WKmYhk678";
+const SHEET_NAME = "database";
+const ROOT_FOLDER_ID = "1H1EOoXj5t8n3wYvAfd3Vpz6DDVKkYW49"; // Родительская папка на Google Диске
+
+let latestFormFolder = null; // Хранение текущей папки между шагами
 
 function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index')
-    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  return HtmlService.createHtmlOutputFromFile("index").addMetaTag(
+    "viewport",
+    "width=device-width, initial-scale=1"
+  );
 }
 
 function submitForm(data) {
   const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
 
   const headers = [
-    'Full Name', 'Nationality', 'Date of Birth', 'Place of Birth', 'Has E-residency',
-    'Passport Number', 'Passport Expiry', 'E-residency ID',
-    'Residential Address', 'Email', 'Phone',
-    'Occupation', 'Company Name', 'Background',
-    'Proposed Company Names', 'Company Email', 'Business Activities',
-    'Client Countries', 'Has EU Clients',
-    'Expected Annual Turnover', 'Monthly Invoices',
-    'Sole Owner?', 'Other Shareholders',
-    'Source of Funds', 'Purpose in Estonia',
-    'PEP Status', 'Sanctions Status',
-    'Timestamp'
+    "Full Name",
+    "Nationality",
+    "Date of Birth",
+    "Place of Birth",
+    "Has E-residency",
+    "Passport Number",
+    "Passport Expiry",
+    "E-residency ID",
+    "Residential Address",
+    "Email",
+    "Phone",
+    "Occupation",
+    "Company Name",
+    "Background",
+    "Proposed Company Names",
+    "Company Email",
+    "Business Activities",
+    "Client Countries",
+    "Has EU Clients",
+    "Expected Annual Turnover",
+    "Monthly Invoices",
+    "Sole Owner?",
+    "Other Shareholders",
+    "Source of Funds",
+    "Purpose in Estonia",
+    "PEP Status",
+    "Sanctions Status",
+    "Timestamp",
   ];
 
   if (sheet.getLastRow() === 0) {
@@ -29,53 +50,79 @@ function submitForm(data) {
   }
 
   const row = [
-    data.fullName || '',
-    data.nationality || '',
-    data.dob || '',
-    data.birthPlace || '',
-    data.hasEResidency || '',
-    data.passportNumber || '',
-    data.passportExpiry || '',
-    data.eresidencyID || '',
-    data.residentialAddress || '',
-    data.email || '',
-    data.phone || '',
-    data.occupation || '',
-    data.companyName || '',
-    data.background || '',
-    data.companyNames || '',
-    data.companyEmail || '',
-    data.businessActivities || '',
-    data.customerCountries || '',
-    data.hasEUClients || '',
-    data.annualTurnover || '',
-    data.monthlyInvoices || '',
-    data.soleOwner || '',
-    data.otherShareholders || '',
-    data.sourceOfFunds || '',
-    data.purpose || '',
-    data.isPEP || '',
-    data.sanctions || '',
-    new Date()
+    data.fullName || "",
+    data.nationality || "",
+    data.dob || "",
+    data.birthPlace || "",
+    data.hasEResidency || "",
+    data.passportNumber || "",
+    data.passportExpiry || "",
+    data.eresidencyID || "",
+    data.residentialAddress || "",
+    data.email || "",
+    data.phone || "",
+    data.occupation || "",
+    data.companyName || "",
+    data.background || "",
+    data.companyNames || "",
+    data.companyEmail || "",
+    data.businessActivities || "",
+    data.customerCountries || "",
+    data.hasEUClients || "",
+    data.annualTurnover || "",
+    data.monthlyInvoices || "",
+    data.soleOwner || "",
+    data.otherShareholders || "",
+    data.sourceOfFunds || "",
+    data.purpose || "",
+    data.isPEP || "",
+    data.sanctions || "",
+    new Date(),
   ];
 
   sheet.appendRow(row);
+
+  // 🗂 Создаём папку
+  const rootFolder = DriveApp.getFolderById(ROOT_FOLDER_ID);
+  const timestamp = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const folderName = `${data.fullName}_${timestamp}`;
+  const newFolder = rootFolder.createFolder(folderName);
+
+  latestFormFolder = newFolder.getId(); // сохраняем ID папки в переменную
+
+  // 📝 Генерируем PDF из шаблона
+  const html = HtmlService.createTemplateFromFile("pdf-template");
+  html.data = data;
+
+  const htmlOutput = html.evaluate().getContent();
+  const blob = Utilities.newBlob(htmlOutput, "text/html", "form.html");
+  const pdf = blob.getAs("application/pdf").setName("Questionnaire.pdf");
+  newFolder.createFile(pdf);
+
+  return "ok";
 }
 
 function uploadFiles(base64Files) {
-  const folder = DriveApp.getFolderById(FOLDER_ID); // Папка для файлов
+  if (!latestFormFolder) {
+    throw new Error("Form folder not initialized");
+  }
 
-  const urls = base64Files.map(file => {
+  const folder = DriveApp.getFolderById(latestFormFolder);
+  const urls = [];
+
+  base64Files.forEach((file) => {
     const blob = Utilities.newBlob(
       Utilities.base64Decode(file.content),
       file.mimeType,
       file.filename
     );
     const createdFile = folder.createFile(blob);
-    createdFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    return createdFile.getUrl();
+    createdFile.setSharing(
+      DriveApp.Access.ANYONE_WITH_LINK,
+      DriveApp.Permission.VIEW
+    );
+    urls.push(createdFile.getUrl());
   });
 
-  return urls; // Можешь сохранить их в таблицу, если хочешь
+  return urls;
 }
-
