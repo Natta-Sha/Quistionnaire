@@ -74,6 +74,15 @@
         text-align: center;
         width: 100%;
       }
+      .input-short {
+        max-width: 300px;
+      }
+      .input-medium {
+        max-width: 420px;
+      }
+      .select-short {
+        max-width: 300px;
+      }
     </style>
   </head>
   <body class="bg-light">
@@ -108,7 +117,7 @@
               <label class="form-label">Date of birth:</label>
               <input
                 type="date"
-                class="form-control w-50"
+                class="form-control input-short"
                 name="dob"
                 required
               />
@@ -126,7 +135,7 @@
             <div class="mb-3">
               <label class="form-label">Do you have E-residency?</label>
               <select
-                class="form-select"
+                class="form-select select-short"
                 name="hasEResidency"
                 id="hasEResidency"
                 required
@@ -146,7 +155,11 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Date of issue / Expiry date:</label>
-                <input type="date" class="form-control" name="passportExpiry" />
+                <input
+                  type="date"
+                  class="form-control input-short"
+                  name="passportExpiry"
+                />
               </div>
             </div>
 
@@ -175,7 +188,7 @@
               <label class="form-label"
                 >Phone number (incl. country code):</label
               >
-              <input type="tel" class="form-control" name="phone" />
+              <input type="tel" class="form-control input-short" name="phone" />
             </div>
 
             <h5 class="mt-4">2. OCCUPATION & BACKGROUND</h5>
@@ -246,7 +259,11 @@
               <label class="form-label"
                 >Will you have clients or partners from the EU?</label
               >
-              <select class="form-select" name="hasEUClients" required>
+              <select
+                class="form-select select-short"
+                name="hasEUClients"
+                required
+              >
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -256,7 +273,7 @@
               <label class="form-label">Expected annual turnover (EUR):</label>
               <input
                 type="number"
-                class="form-control"
+                class="form-control input-short"
                 name="annualTurnover"
                 required
               />
@@ -267,7 +284,7 @@
               >
               <input
                 type="number"
-                class="form-control"
+                class="form-control input-short"
                 name="monthlyInvoices"
                 required
               />
@@ -279,7 +296,7 @@
                 >Will you be the sole shareholder and director?</label
               >
               <select
-                class="form-select"
+                class="form-select select-short"
                 name="soleOwner"
                 id="soleOwner"
                 required
@@ -321,7 +338,7 @@
                 >Do you or any associated person hold a political position
                 (PEP)?</label
               >
-              <select class="form-select" name="isPEP" required>
+              <select class="form-select select-short" name="isPEP" required>
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -332,7 +349,11 @@
                 >Are you or any related party under international
                 sanctions?</label
               >
-              <select class="form-select" name="sanctions" required>
+              <select
+                class="form-select select-short"
+                name="sanctions"
+                required
+              >
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
