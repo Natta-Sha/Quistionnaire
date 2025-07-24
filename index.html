@@ -16,6 +16,19 @@
         max-width: 720px;
         margin: 0 auto;
       }
+      .btn-custom {
+        background-color: #f6d376;
+        border-color: #f6d376;
+        color: #333;
+      }
+      .btn-custom:hover,
+      .btn-custom:focus {
+        background-color: #f2c95b;
+        border-color: #f2c95b;
+      }
+      .spinner-border {
+        color: #8a6d3b;
+      }
     </style>
   </head>
   <body class="bg-light">
@@ -299,7 +312,19 @@
             </div>
 
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-warning">Submit</button>
+              <button
+                type="submit"
+                class="btn btn-custom d-flex justify-content-center align-items-center"
+              >
+                <span>Submit</span>
+                <div
+                  class="spinner-border spinner-border-sm ms-2 d-none"
+                  role="status"
+                  id="form-spinner"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
             </div>
           </form>
         </div>
@@ -339,11 +364,7 @@
     <script>
       const form = document.getElementById("questionnaire-form");
       const submitBtn = form.querySelector('button[type="submit"]');
-
-      const spinner = document.createElement("div");
-      spinner.className = "spinner-border spinner-border-sm ms-2";
-      spinner.setAttribute("role", "status");
-      spinner.innerHTML = '<span class="visually-hidden">Loading...</span>';
+      const spinner = document.getElementById("form-spinner");
 
       document
         .getElementById("hasEResidency")
@@ -368,7 +389,7 @@
         e.preventDefault();
 
         submitBtn.disabled = true;
-        submitBtn.appendChild(spinner);
+        spinner.classList.remove("d-none");
 
         const data = {};
         const elements = form.querySelectorAll("input, select, textarea");
@@ -383,7 +404,7 @@
         const base64Files = [];
 
         if (filesToRead === 0) {
-          finishSubmission();
+          processForm(data, base64Files);
           return;
         }
 
@@ -391,7 +412,7 @@
           const file = input.files[0];
           if (!file) {
             filesToRead--;
-            if (filesToRead === 0) finishSubmission();
+            if (filesToRead === 0) processForm(data, base64Files);
             return;
           }
 
@@ -404,30 +425,41 @@
               content: base64,
             });
             filesToRead--;
-            if (filesToRead === 0) finishSubmission();
+            if (filesToRead === 0) processForm(data, base64Files);
           };
           reader.readAsDataURL(file);
         });
-
-        function finishSubmission() {
-          google.script.run
-            .withSuccessHandler(function (folderId) {
-              google.script.run
-                .withSuccessHandler(() => {
-                  const modal = new bootstrap.Modal(
-                    document.getElementById("successModal")
-                  );
-                  modal.show();
-
-                  form.reset();
-                  submitBtn.disabled = false;
-                  spinner.remove();
-                })
-                .uploadFiles(folderId, base64Files);
-            })
-            .submitForm(data);
-        }
       });
+
+      function processForm(data, files) {
+        google.script.run
+          .withSuccessHandler(function (folderId) {
+            // После успешной отправки формы, загружаем файлы
+            google.script.run
+              .withSuccessHandler(() => {
+                const modal = new bootstrap.Modal(
+                  document.getElementById("successModal")
+                );
+                modal.show();
+
+                form.reset();
+                submitBtn.disabled = false;
+                spinner.classList.add("d-none");
+              })
+              .withFailureHandler(function (error) {
+                alert("❌ File upload failed: " + error.message);
+                submitBtn.disabled = false;
+                spinner.classList.add("d-none");
+              })
+              .uploadFiles(folderId, files);
+          })
+          .withFailureHandler(function (error) {
+            alert("❌ Form submission failed: " + error.message);
+            submitBtn.disabled = false;
+            spinner.classList.add("d-none");
+          })
+          .submitForm(data);
+      }
     </script>
   </body>
 </html>
