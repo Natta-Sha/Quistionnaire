@@ -107,15 +107,6 @@ function submitForm(data) {
     body: `A new client has submitted the questionnaire:\n\n${messageText}`,
   });
 
-  // 📧 Email клиенту
-  if (data.email) {
-    MailApp.sendEmail({
-      to: data.email,
-      subject: "🧾 Your Submission Received – PAES Finance",
-      body: `Dear ${data.fullName},\n\nThank you for your submission. Here is a copy of your data for reference:\n\n${messageText}\n\nBest regards,\nPAES Finance Team`,
-    });
-  }
-
   return newFolder.getId(); // Возвращаем ID для загрузки файлов
 }
 

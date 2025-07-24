@@ -100,7 +100,9 @@
           <form id="questionnaire-form">
             <h5>1. PERSONAL INFORMATION</h5>
             <div class="mb-3">
-              <label class="form-label">Full name (as in passport):</label>
+              <label class="form-label required-label"
+                >Full name (as in passport):</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -109,7 +111,7 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Nationality:</label>
+              <label class="form-label required-label">Nationality:</label>
               <input
                 type="text"
                 class="form-control"
@@ -118,7 +120,7 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Date of birth:</label>
+              <label class="form-label required-label">Date of birth:</label>
               <input
                 type="date"
                 class="form-control input-short"
@@ -127,7 +129,9 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Place of birth (City, Country):</label>
+              <label class="form-label required-label"
+                >Place of birth (City, Country):</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -137,7 +141,9 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Do you have E-residency?</label>
+              <label class="form-label required-label"
+                >Do you have E-residency?</label
+              >
               <select
                 class="form-select select-short"
                 name="hasEResidency"
@@ -152,27 +158,40 @@
 
             <div id="if-no-eresidency" class="hidden">
               <div class="mb-3">
-                <label class="form-label"
+                <label class="form-label required-label"
                   >Personal ID code / Passport number:</label
                 >
-                <input type="text" class="form-control" name="passportNumber" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="passportNumber"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label class="form-label">Date of issue / Expiry date:</label>
+                <label class="form-label required-label"
+                  >Date of issue / Expiry date:</label
+                >
                 <input
                   type="date"
                   class="form-control input-short"
                   name="passportExpiry"
+                  required
                 />
               </div>
             </div>
 
             <div id="if-yes-eresidency" class="hidden">
               <div class="mb-3">
-                <label class="form-label"
+                <label class="form-label required-label"
                   >E-residency card number (Estonian ID):</label
                 >
-                <input type="text" class="form-control" name="eresidencyID" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="eresidencyID"
+                  required
+                />
               </div>
             </div>
 
@@ -371,18 +390,21 @@
             </div>
 
             <h5 class="mt-4">6. DOCUMENTS TO ATTACH</h5>
-            <div class="mb-3">
-              <label class="form-label">E-residency card (front side):</label>
+            <div class="mb-3 hidden" id="eresidency-upload">
+              <label class="form-label required-label"
+                >E-residency card (front side):</label
+              >
               <input
                 type="file"
                 name="eresidencyCard"
                 class="form-control"
                 accept="image/*,application/pdf"
-                required
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Passport or national ID:</label>
+              <label class="form-label required-label"
+                >Passport or national ID:</label
+              >
               <input
                 type="file"
                 name="passportScan"
@@ -452,12 +474,16 @@
       document
         .getElementById("hasEResidency")
         .addEventListener("change", function () {
+          const isYes = this.value === "Yes";
           document
             .getElementById("if-yes-eresidency")
             .classList.toggle("hidden", this.value !== "Yes");
           document
             .getElementById("if-no-eresidency")
             .classList.toggle("hidden", this.value !== "No");
+          document
+            .getElementById("eresidency-upload")
+            .classList.toggle("hidden", !isYes);
         });
 
       document
