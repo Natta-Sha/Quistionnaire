@@ -112,24 +112,42 @@ function submitForm(data) {
 
 function uploadFiles(folderId, base64Files) {
   if (!folderId) {
-    throw new Error("Form folder ID not provided");
+    throw new Error("❌ Folder ID not provided");
+  }
+
+  if (!base64Files || base64Files.length === 0) {
+    throw new Error("❌ No files provided");
   }
 
   const folder = DriveApp.getFolderById(folderId);
   const urls = [];
 
-  base64Files.forEach((file) => {
-    const blob = Utilities.newBlob(
-      Utilities.base64Decode(file.content),
-      file.mimeType,
-      file.filename
-    );
-    const createdFile = folder.createFile(blob);
-    createdFile.setSharing(
-      DriveApp.Access.ANYONE_WITH_LINK,
-      DriveApp.Permission.VIEW
-    );
-    urls.push(createdFile.getUrl());
+  base64Files.forEach((file, index) => {
+    try {
+      if (!file || !file.content || !file.mimeType || !file.filename) {
+        throw new Error(`Invalid file data at index ${index}`);
+      }
+
+      const blob = Utilities.newBlob(
+        Utilities.base64Decode(file.content),
+        file.mimeType,
+        file.filename
+      );
+
+      const createdFile = folder.createFile(blob);
+      createdFile.setSharing(
+        DriveApp.Access.ANYONE_WITH_LINK,
+        DriveApp.Permission.VIEW
+      );
+
+      urls.push(createdFile.getUrl());
+    } catch (e) {
+      throw new Error(
+        `❌ Failed to upload file "${file?.filename || "unknown"}": ${
+          e.message
+        }`
+      );
+    }
   });
 
   return urls;
