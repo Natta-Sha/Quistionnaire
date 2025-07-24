@@ -186,14 +186,30 @@
               </div>
               <div class="mb-3">
                 <label class="form-label required-label"
-                  >Date of issue / Expiry date:</label
+                  >Passport issue and expiry date:</label
                 >
-                <input
-                  type="date"
-                  class="form-control input-short"
-                  name="passportExpiry"
-                  required
-                />
+                <div class="d-flex gap-2 flex-wrap">
+                  <div>
+                    <input
+                      type="date"
+                      class="form-control input-short"
+                      name="passportIssue"
+                      required
+                      placeholder="Date of issue"
+                    />
+                    <small class="form-text text-muted">Date of issue</small>
+                  </div>
+                  <div>
+                    <input
+                      type="date"
+                      class="form-control input-short"
+                      name="passportExpiry"
+                      required
+                      placeholder="Expiry date"
+                    />
+                    <small class="form-text text-muted">Expiry date</small>
+                  </div>
+                </div>
               </div>
             </div>
 
