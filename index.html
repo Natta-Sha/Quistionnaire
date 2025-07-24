@@ -408,6 +408,7 @@
                 class="form-control"
                 accept="image/*,application/pdf"
               />
+              <small class="form-text text-warning">Max file size: 5 MB</small>
             </div>
             <div class="mb-3">
               <label class="form-label required-label"
@@ -420,6 +421,7 @@
                 accept="image/*,application/pdf"
                 required
               />
+              <small class="form-text text-warning">Max file size: 5 MB</small>
             </div>
 
             <div class="d-grid mt-4">
@@ -474,7 +476,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
       const form = document.getElementById("questionnaire-form");
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -539,6 +541,22 @@
         const fileInputs = form.querySelectorAll('input[type="file"]');
         let filesToRead = fileInputs.length;
         const base64Files = [];
+
+        const MAX_FILE_SIZE_MB = 5;
+        const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+        // ❌ Проверка размера всех файлов
+        for (const input of fileInputs) {
+          const file = input.files[0];
+          if (file && file.size > MAX_FILE_SIZE) {
+            alert(
+              `❌ File "${file.name}" is too large. Max allowed size is ${MAX_FILE_SIZE_MB} MB.`
+            );
+            submitBtn.disabled = false;
+            spinner.classList.add("d-none");
+            return;
+          }
+        }
 
         if (filesToRead === 0) {
           processForm(data, base64Files);
