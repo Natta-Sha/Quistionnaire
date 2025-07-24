@@ -95,6 +95,27 @@ function submitForm(data) {
   const pdf = blob.getAs("application/pdf").setName("Questionnaire.pdf");
   newFolder.createFile(pdf);
 
+  // 📩 Составляем текст письма
+  const messageText = Object.keys(data)
+    .map((key) => `${key.replace(/([A-Z])/g, " $1")}: ${data[key]}`)
+    .join("\n");
+
+  // 📧 Email админу
+  MailApp.sendEmail({
+    to: "natalyabogdanovanatalya@gmail.com",
+    subject: `📝 New Questionnaire: ${data.fullName}`,
+    body: `A new client has submitted the questionnaire:\n\n${messageText}`,
+  });
+
+  // 📧 Email клиенту
+  if (data.email) {
+    MailApp.sendEmail({
+      to: data.email,
+      subject: "🧾 Your Submission Received – PAES Finance",
+      body: `Dear ${data.fullName},\n\nThank you for your submission. Here is a copy of your data for reference:\n\n${messageText}\n\nBest regards,\nPAES Finance Team`,
+    });
+  }
+
   return newFolder.getId(); // Возвращаем ID для загрузки файлов
 }
 
