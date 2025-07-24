@@ -97,14 +97,11 @@ function submitForm(data) {
   const pdf = blob.getAs("application/pdf").setName("Questionnaire.pdf");
   newFolder.createFile(pdf);
 
-  // 📩 Составляем текст письма
-  const messageText = `✅ A new questionnaire was submitted.\n\n📁 Folder link: ${newFolder.getUrl()}`;
-
   // 📧 Email админу
   MailApp.sendEmail({
     to: "natalyabogdanovanatalya@gmail.com",
     subject: `📝 New Questionnaire: ${data.fullName}`,
-    body: `A new client has submitted the questionnaire:\n\n${messageText}`,
+    body: `✅ A new questionnaire was submitted.\n\n📁 Folder link: ${newFolder.getUrl()}`,
   });
 
   return newFolder.getId(); // Возвращаем ID для загрузки файлов
