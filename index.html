@@ -196,7 +196,9 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Residential address:</label>
+              <label class="form-label required-label"
+                >Residential address:</label
+              >
               <textarea
                 class="form-control"
                 name="residentialAddress"
@@ -204,7 +206,7 @@
               ></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label">Email address:</label>
+              <label class="form-label required-label">Email address:</label>
               <input type="email" class="form-control" name="email" required />
             </div>
             <div class="mb-3">
@@ -216,7 +218,9 @@
 
             <h5 class="mt-4">2. OCCUPATION & BACKGROUND</h5>
             <div class="mb-3">
-              <label class="form-label">Current occupation / job title:</label>
+              <label class="form-label required-label"
+                >Current occupation / job title:</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -243,7 +247,7 @@
 
             <h5 class="mt-4">3. COMPANY INFORMATION</h5>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Proposed company name (1–3 variants):</label
               >
               <textarea
@@ -253,7 +257,9 @@
               ></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label">Company e-mail address:</label>
+              <label class="form-label required-label"
+                >Company e-mail address:</label
+              >
               <input
                 type="email"
                 class="form-control"
@@ -262,7 +268,9 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Planned business activities:</label>
+              <label class="form-label required-label"
+                >Planned business activities:</label
+              >
               <textarea
                 class="form-control"
                 name="businessActivities"
@@ -270,7 +278,7 @@
               ></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Country(-ies) of your customers/clients:</label
               >
               <input
@@ -281,7 +289,7 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Will you have clients or partners from the EU?</label
               >
               <select
@@ -295,7 +303,9 @@
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label">Expected annual turnover (EUR):</label>
+              <label class="form-label required-label"
+                >Expected annual turnover (EUR):</label
+              >
               <input
                 type="number"
                 class="form-control input-short"
@@ -304,7 +314,7 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Expected monthly number of invoices (issued and
                 received):</label
               >
@@ -318,7 +328,7 @@
 
             <h5 class="mt-4">4. OWNERSHIP & MANAGEMENT</h5>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Will you be the sole shareholder and director?</label
               >
               <select
@@ -333,19 +343,20 @@
               </select>
             </div>
             <div class="mb-3 hidden" id="otherOwners">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >If not, please provide details of other
                 shareholders/directors:</label
               >
               <textarea
                 class="form-control"
                 name="otherShareholders"
+                required
               ></textarea>
             </div>
 
             <h5 class="mt-4">5. COMPLIANCE & KYC</h5>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Source of funds (personal savings, business income,
                 etc):</label
               >
@@ -357,13 +368,13 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Purpose of setting up the company in Estonia:</label
               >
               <textarea class="form-control" name="purpose" required></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Do you or any associated person hold a political position
                 (PEP)?</label
               >
@@ -374,7 +385,7 @@
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label"
+              <label class="form-label required-label"
                 >Are you or any related party under international
                 sanctions?</label
               >
@@ -392,7 +403,8 @@
             <h5 class="mt-4">6. DOCUMENTS TO ATTACH</h5>
             <div class="mb-3 hidden" id="eresidency-upload">
               <label class="form-label required-label"
-                >E-residency card (front side):</label
+                >A clear photo/scan of your e-residency card (front
+                side):</label
               >
               <input
                 type="file"
@@ -403,7 +415,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label required-label"
-                >Passport or national ID:</label
+                >A clear scan of your passport or national ID:</label
               >
               <input
                 type="file"
