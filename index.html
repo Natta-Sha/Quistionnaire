@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <base target="_top">
-    <meta charset="utf-8">
+    <base target="_top" />
+    <meta charset="utf-8" />
     <title>Client Questionnaire</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <style>
-      .hidden { display: none; }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body class="bg-light">
@@ -21,24 +26,44 @@
             <h5>1. PERSONAL INFORMATION</h5>
             <div class="mb-3">
               <label class="form-label">Full name (as in passport):</label>
-              <input type="text" class="form-control" name="fullName" required>
+              <input
+                type="text"
+                class="form-control"
+                name="fullName"
+                required
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">Nationality:</label>
-              <input type="text" class="form-control" name="nationality" required>
+              <input
+                type="text"
+                class="form-control"
+                name="nationality"
+                required
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">Date of birth:</label>
-              <input type="date" class="form-control" name="dob" required>
+              <input type="date" class="form-control" name="dob" required />
             </div>
             <div class="mb-3">
               <label class="form-label">Place of birth (City, Country):</label>
-              <input type="text" class="form-control" name="birthPlace" required>
+              <input
+                type="text"
+                class="form-control"
+                name="birthPlace"
+                required
+              />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Do you have E-residency?</label>
-              <select class="form-select" name="hasEResidency" id="hasEResidency" required>
+              <select
+                class="form-select"
+                name="hasEResidency"
+                id="hasEResidency"
+                required
+              >
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -47,68 +72,113 @@
 
             <div id="if-no-eresidency" class="hidden">
               <div class="mb-3">
-                <label class="form-label">Personal ID code / Passport number:</label>
-                <input type="text" class="form-control" name="passportNumber">
+                <label class="form-label"
+                  >Personal ID code / Passport number:</label
+                >
+                <input type="text" class="form-control" name="passportNumber" />
               </div>
               <div class="mb-3">
                 <label class="form-label">Date of issue / Expiry date:</label>
-                <input type="date" class="form-control" name="passportExpiry">
+                <input type="date" class="form-control" name="passportExpiry" />
               </div>
             </div>
 
             <div id="if-yes-eresidency" class="hidden">
               <div class="mb-3">
-                <label class="form-label">E-residency card number (Estonian ID):</label>
-                <input type="text" class="form-control" name="eresidencyID">
+                <label class="form-label"
+                  >E-residency card number (Estonian ID):</label
+                >
+                <input type="text" class="form-control" name="eresidencyID" />
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Residential address:</label>
-              <textarea class="form-control" name="residentialAddress" required></textarea>
+              <textarea
+                class="form-control"
+                name="residentialAddress"
+                required
+              ></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label">Email address:</label>
-              <input type="email" class="form-control" name="email" required>
+              <input type="email" class="form-control" name="email" required />
             </div>
             <div class="mb-3">
-              <label class="form-label">Phone number (incl. country code):</label>
-              <input type="tel" class="form-control" name="phone">
+              <label class="form-label"
+                >Phone number (incl. country code):</label
+              >
+              <input type="tel" class="form-control" name="phone" />
             </div>
 
             <h5 class="mt-4">2. OCCUPATION & BACKGROUND</h5>
             <div class="mb-3">
               <label class="form-label">Current occupation / job title:</label>
-              <input type="text" class="form-control" name="occupation" required>
+              <input
+                type="text"
+                class="form-control"
+                name="occupation"
+                required
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">Company name:</label>
-              <input type="text" class="form-control" name="companyName">
+              <input type="text" class="form-control" name="companyName" />
             </div>
             <div class="mb-3">
-              <label class="form-label">Brief description of your professional background:</label>
-              <textarea class="form-control" name="background" required></textarea>
+              <label class="form-label"
+                >Brief description of your professional background:</label
+              >
+              <textarea
+                class="form-control"
+                name="background"
+                required
+              ></textarea>
             </div>
 
             <h5 class="mt-4">3. COMPANY INFORMATION</h5>
             <div class="mb-3">
-              <label class="form-label">Proposed company name (1–3 variants):</label>
-              <textarea class="form-control" name="companyNames" required></textarea>
+              <label class="form-label"
+                >Proposed company name (1–3 variants):</label
+              >
+              <textarea
+                class="form-control"
+                name="companyNames"
+                required
+              ></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label">Company e-mail address:</label>
-              <input type="email" class="form-control" name="companyEmail" required>
+              <input
+                type="email"
+                class="form-control"
+                name="companyEmail"
+                required
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">Planned business activities:</label>
-              <textarea class="form-control" name="businessActivities" required></textarea>
+              <textarea
+                class="form-control"
+                name="businessActivities"
+                required
+              ></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label">Country(-ies) of your customers/clients:</label>
-              <input type="text" class="form-control" name="customerCountries" required>
+              <label class="form-label"
+                >Country(-ies) of your customers/clients:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="customerCountries"
+                required
+              />
             </div>
             <div class="mb-3">
-              <label class="form-label">Will you have clients or partners from the EU?</label>
+              <label class="form-label"
+                >Will you have clients or partners from the EU?</label
+              >
               <select class="form-select" name="hasEUClients" required>
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
@@ -117,38 +187,73 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Expected annual turnover (EUR):</label>
-              <input type="number" class="form-control" name="annualTurnover" required>
+              <input
+                type="number"
+                class="form-control"
+                name="annualTurnover"
+                required
+              />
             </div>
             <div class="mb-3">
-              <label class="form-label">Expected monthly number of invoices:</label>
-              <input type="number" class="form-control" name="monthlyInvoices" required>
+              <label class="form-label"
+                >Expected monthly number of invoices:</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="monthlyInvoices"
+                required
+              />
             </div>
 
             <h5 class="mt-4">4. OWNERSHIP & MANAGEMENT</h5>
             <div class="mb-3">
-              <label class="form-label">Will you be the sole shareholder and director?</label>
-              <select class="form-select" name="soleOwner" id="soleOwner" required>
+              <label class="form-label"
+                >Will you be the sole shareholder and director?</label
+              >
+              <select
+                class="form-select"
+                name="soleOwner"
+                id="soleOwner"
+                required
+              >
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
             </div>
             <div class="mb-3 hidden" id="otherOwners">
-              <label class="form-label">If not, please provide details of other shareholders/directors:</label>
-              <textarea class="form-control" name="otherShareholders"></textarea>
+              <label class="form-label"
+                >If not, please provide details of other
+                shareholders/directors:</label
+              >
+              <textarea
+                class="form-control"
+                name="otherShareholders"
+              ></textarea>
             </div>
 
             <h5 class="mt-4">5. COMPLIANCE & KYC</h5>
             <div class="mb-3">
               <label class="form-label">Source of funds:</label>
-              <input type="text" class="form-control" name="sourceOfFunds" required>
+              <input
+                type="text"
+                class="form-control"
+                name="sourceOfFunds"
+                required
+              />
             </div>
             <div class="mb-3">
-              <label class="form-label">Purpose of setting up the company in Estonia:</label>
+              <label class="form-label"
+                >Purpose of setting up the company in Estonia:</label
+              >
               <textarea class="form-control" name="purpose" required></textarea>
             </div>
             <div class="mb-3">
-              <label class="form-label">Do you or any associated person hold a political position (PEP)?</label>
+              <label class="form-label"
+                >Do you or any associated person hold a political position
+                (PEP)?</label
+              >
               <select class="form-select" name="isPEP" required>
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
@@ -156,7 +261,10 @@
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label">Are you or any related party under international sanctions?</label>
+              <label class="form-label"
+                >Are you or any related party under international
+                sanctions?</label
+              >
               <select class="form-select" name="sanctions" required>
                 <option value="">Select...</option>
                 <option value="Yes">Yes</option>
@@ -167,11 +275,23 @@
             <h5 class="mt-4">6. DOCUMENTS TO ATTACH</h5>
             <div class="mb-3">
               <label class="form-label">E-residency card (front side):</label>
-              <input type="file" name="eresidencyCard" class="form-control" accept="image/*,application/pdf" form="file-upload-form" required>
+              <input
+                type="file"
+                name="eresidencyCard"
+                class="form-control"
+                accept="image/*,application/pdf"
+                required
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">Passport or national ID:</label>
-              <input type="file" name="passportScan" class="form-control" accept="image/*,application/pdf" form="file-upload-form" required>
+              <input
+                type="file"
+                name="passportScan"
+                class="form-control"
+                accept="image/*,application/pdf"
+                required
+              />
             </div>
 
             <div class="d-grid mt-4">
@@ -181,80 +301,89 @@
               Form submitted successfully!
             </div>
           </form>
-
         </div>
       </div>
     </div>
 
     <script>
-  const form = document.getElementById("questionnaire-form");
+      const form = document.getElementById("questionnaire-form");
 
-  // Показывать / скрывать блоки при выборе
-  document.getElementById("hasEResidency").addEventListener("change", function () {
-    document.getElementById("if-yes-eresidency").classList.toggle("hidden", this.value !== "Yes");
-    document.getElementById("if-no-eresidency").classList.toggle("hidden", this.value !== "No");
-  });
-
-  document.getElementById("soleOwner").addEventListener("change", function () {
-    document.getElementById("otherOwners").classList.toggle("hidden", this.value !== "No");
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    // Сохраняем значения полей
-    const data = {};
-    const elements = form.querySelectorAll("input, select, textarea");
-    elements.forEach(el => {
-      if (el.type !== "file") {
-        data[el.name] = el.value;
-      }
-    });
-
-    // Собираем файлы
-    const fileInputs = form.querySelectorAll('input[type="file"]');
-    let filesToRead = fileInputs.length;
-    const base64Files = [];
-
-    if (filesToRead === 0) {
-      finishSubmission();
-      return;
-    }
-
-    fileInputs.forEach(input => {
-      const file = input.files[0];
-      if (!file) {
-        filesToRead--;
-        if (filesToRead === 0) finishSubmission();
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const base64 = e.target.result.split(',')[1]; // убираем data:...;base64,
-        base64Files.push({
-          filename: file.name,
-          mimeType: file.type,
-          content: base64
+      document
+        .getElementById("hasEResidency")
+        .addEventListener("change", function () {
+          document
+            .getElementById("if-yes-eresidency")
+            .classList.toggle("hidden", this.value !== "Yes");
+          document
+            .getElementById("if-no-eresidency")
+            .classList.toggle("hidden", this.value !== "No");
         });
-        filesToRead--;
-        if (filesToRead === 0) finishSubmission();
-      };
-      reader.readAsDataURL(file);
-    });
 
-    function finishSubmission() {
-      // Сначала отправляем данные анкеты
-      google.script.run.withSuccessHandler(() => {
-        // Потом загружаем файлы
-        google.script.run.withSuccessHandler(() => {
-          document.getElementById("success-msg").classList.remove("d-none");
-          form.reset();
-        }).uploadFiles(base64Files);
-      }).submitForm(data);
-    }
-  });
-</script>
+      document
+        .getElementById("soleOwner")
+        .addEventListener("change", function () {
+          document
+            .getElementById("otherOwners")
+            .classList.toggle("hidden", this.value !== "No");
+        });
 
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const data = {};
+        const elements = form.querySelectorAll("input, select, textarea");
+        elements.forEach((el) => {
+          if (el.type !== "file") {
+            data[el.name] = el.value;
+          }
+        });
+
+        const fileInputs = form.querySelectorAll('input[type="file"]');
+        let filesToRead = fileInputs.length;
+        const base64Files = [];
+
+        if (filesToRead === 0) {
+          finishSubmission();
+          return;
+        }
+
+        fileInputs.forEach((input) => {
+          const file = input.files[0];
+          if (!file) {
+            filesToRead--;
+            if (filesToRead === 0) finishSubmission();
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const base64 = e.target.result.split(",")[1];
+            base64Files.push({
+              filename: file.name,
+              mimeType: file.type,
+              content: base64,
+            });
+            filesToRead--;
+            if (filesToRead === 0) finishSubmission();
+          };
+          reader.readAsDataURL(file);
+        });
+
+        function finishSubmission() {
+          google.script.run
+            .withSuccessHandler(function (folderId) {
+              google.script.run
+                .withSuccessHandler(() => {
+                  document
+                    .getElementById("success-msg")
+                    .classList.remove("d-none");
+                  form.reset();
+                })
+                .uploadFiles(folderId, base64Files);
+            })
+            .submitForm(data);
+        }
+      });
+    </script>
   </body>
 </html>

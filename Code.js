@@ -2,8 +2,6 @@ const SHEET_ID = "1fVq4tRVSyk6Dd-NgucS5fbwmwD2RihJon0WKmYhk678";
 const SHEET_NAME = "database";
 const ROOT_FOLDER_ID = "1H1EOoXj5t8n3wYvAfd3Vpz6DDVKkYW49"; // Родительская папка на Google Диске
 
-let latestFormFolder = null; // Хранение текущей папки между шагами
-
 function doGet() {
   return HtmlService.createHtmlOutputFromFile("index").addMetaTag(
     "viewport",
@@ -84,13 +82,11 @@ function submitForm(data) {
 
   // 🗂 Создаём папку
   const rootFolder = DriveApp.getFolderById(ROOT_FOLDER_ID);
-  const timestamp = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const timestamp = new Date().toISOString().split("T")[0];
   const folderName = `${data.fullName}_${timestamp}`;
   const newFolder = rootFolder.createFolder(folderName);
 
-  latestFormFolder = newFolder.getId(); // сохраняем ID папки в переменную
-
-  // 📝 Генерируем PDF из шаблона
+  // 📝 Создаём PDF
   const html = HtmlService.createTemplateFromFile("pdf-template");
   html.data = data;
 
@@ -99,15 +95,15 @@ function submitForm(data) {
   const pdf = blob.getAs("application/pdf").setName("Questionnaire.pdf");
   newFolder.createFile(pdf);
 
-  return "ok";
+  return newFolder.getId(); // Возвращаем ID для загрузки файлов
 }
 
-function uploadFiles(base64Files) {
-  if (!latestFormFolder) {
-    throw new Error("Form folder not initialized");
+function uploadFiles(folderId, base64Files) {
+  if (!folderId) {
+    throw new Error("Form folder ID not provided");
   }
 
-  const folder = DriveApp.getFolderById(latestFormFolder);
+  const folder = DriveApp.getFolderById(folderId);
   const urls = [];
 
   base64Files.forEach((file) => {
