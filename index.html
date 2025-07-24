@@ -539,9 +539,10 @@
             .classList.toggle("hidden", !isYes);
 
           toggleRequired(
-            "input[name='passportNumber'], input[name='passportExpiry']",
+            "input[name='passportNumber'], input[name='passportIssue'], input[name='passportExpiry']",
             !isYes
           );
+
           toggleRequired("input[name='eresidencyID']", isYes);
         });
 
