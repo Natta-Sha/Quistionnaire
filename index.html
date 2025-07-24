@@ -307,6 +307,11 @@
 
     <script>
       const form = document.getElementById("questionnaire-form");
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const spinner = document.createElement("div");
+      spinner.className = "spinner-border text-warning ms-2";
+      spinner.setAttribute("role", "status");
+      spinner.innerHTML = '<span class="visually-hidden">Loading...</span>';
 
       document
         .getElementById("hasEResidency")
@@ -330,6 +335,10 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
+        // 🔒 Disable button + show spinner
+        submitBtn.disabled = true;
+        submitBtn.appendChild(spinner);
+
         const data = {};
         const elements = form.querySelectorAll("input, select, textarea");
         elements.forEach((el) => {
@@ -343,7 +352,7 @@
         const base64Files = [];
 
         if (filesToRead === 0) {
-          finishSubmission();
+          finishSubmission(); // если нет файлов
           return;
         }
 
@@ -370,14 +379,19 @@
         });
 
         function finishSubmission() {
+          // ✅ 1. Сохраняем анкету, создаём папку, получаем folderId
           google.script.run
             .withSuccessHandler(function (folderId) {
+              // ✅ 2. Загружаем файлы
               google.script.run
                 .withSuccessHandler(() => {
+                  // ✅ 3. Всё готово — показываем сообщение, сбрасываем форму
                   document
                     .getElementById("success-msg")
                     .classList.remove("d-none");
                   form.reset();
+                  spinner.remove();
+                  submitBtn.disabled = false;
                 })
                 .uploadFiles(folderId, base64Files);
             })
