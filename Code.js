@@ -1,6 +1,6 @@
 const SHEET_ID = "1fVq4tRVSyk6Dd-NgucS5fbwmwD2RihJon0WKmYhk678";
 const SHEET_NAME = "database";
-const ROOT_FOLDER_ID = "1H1EOoXj5t8n3wYvAfd3Vpz6DDVKkYW49"; // Родительская папка на Google Диске
+const ROOT_FOLDER_ID = "1jQMdBRA3QSLEqH458CU9mXF0_uR8Msjf"; // Родительская папка на Google Диске
 
 function doGet() {
   return HtmlService.createHtmlOutputFromFile("index").addMetaTag(
