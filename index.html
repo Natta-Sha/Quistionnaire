@@ -12,22 +12,47 @@
       .hidden {
         display: none;
       }
+
       .narrow-card {
         max-width: 720px;
         margin: 0 auto;
       }
+
+      body.bg-light {
+        background-color: #000 !important;
+        color: #fff;
+      }
+
+      .card-body {
+        background-color: #1a1a1a;
+        color: #fff;
+      }
+
       .btn-custom {
         background-color: #f6d376;
         border-color: #f6d376;
-        color: #333;
+        color: #000;
       }
+
       .btn-custom:hover,
       .btn-custom:focus {
         background-color: #f2c95b;
         border-color: #f2c95b;
       }
+
       .spinner-border {
-        color: #8a6d3b;
+        color: #f6d376;
+      }
+
+      /* Дополнительное уменьшение ширины отдельных полей */
+      input.w-50,
+      select.w-50 {
+        max-width: 50% !important;
+      }
+
+      input.w-75,
+      select.w-75 {
+        max-width: 75% !important;
       }
     </style>
   </head>
