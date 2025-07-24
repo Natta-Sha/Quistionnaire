@@ -83,6 +83,10 @@
       .select-short {
         max-width: 300px;
       }
+      .required-label::after {
+        content: " *";
+        color: red;
+      }
     </style>
   </head>
   <body class="bg-light">
@@ -202,7 +206,9 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label">Company name:</label>
+              <label class="form-label"
+                >Company name (if self-employed or employed):</label
+              >
               <input type="text" class="form-control" name="companyName" />
             </div>
             <div class="mb-3">
@@ -280,7 +286,8 @@
             </div>
             <div class="mb-3">
               <label class="form-label"
-                >Expected monthly number of invoices:</label
+                >Expected monthly number of invoices (issued and
+                received):</label
               >
               <input
                 type="number"
@@ -319,7 +326,10 @@
 
             <h5 class="mt-4">5. COMPLIANCE & KYC</h5>
             <div class="mb-3">
-              <label class="form-label">Source of funds:</label>
+              <label class="form-label"
+                >Source of funds (personal savings, business income,
+                etc):</label
+              >
               <input
                 type="text"
                 class="form-control"
