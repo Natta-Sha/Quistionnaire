@@ -574,8 +574,13 @@
             !passportUpload.classList.contains("hidden") &&
             !passportFile.files.length
           ) {
-            alert("❌ Please upload your passport or national ID.");
+            passportFile.setCustomValidity(
+              "Please upload your passport or national ID."
+            );
+            passportFile.reportValidity();
             return;
+          } else {
+            passportFile.setCustomValidity(""); // сброс ошибки
           }
         } else {
           const eresidencyFile = form.querySelector(
@@ -586,8 +591,13 @@
             !eresidencyUpload.classList.contains("hidden") &&
             !eresidencyFile.files.length
           ) {
-            alert("❌ Please upload your e-residency card.");
+            eresidencyFile.setCustomValidity(
+              "Please upload your e-residency card."
+            );
+            eresidencyFile.reportValidity();
             return;
+          } else {
+            eresidencyFile.setCustomValidity(""); // сброс ошибки
           }
         }
 
