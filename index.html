@@ -441,7 +441,7 @@
               />
               <small class="form-text text-warning">Max file size: 5 MB</small>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 hidden" id="passport-upload">
               <label class="form-label required-label"
                 >A clear scan of your passport or national ID:</label
               >
@@ -450,7 +450,6 @@
                 name="passportScan"
                 class="form-control"
                 accept="image/*,application/pdf"
-                required
               />
               <small class="form-text text-warning">Max file size: 5 MB</small>
             </div>
@@ -537,13 +536,16 @@
           document
             .getElementById("eresidency-upload")
             .classList.toggle("hidden", !isYes);
+          document
+            .getElementById("passport-upload")
+            .classList.toggle("hidden", isYes); // 👈 Показываем паспорт только если нет е-резидента
 
           toggleRequired(
             "input[name='passportNumber'], input[name='passportIssue'], input[name='passportExpiry']",
             !isYes
           );
-
           toggleRequired("input[name='eresidencyID']", isYes);
+          toggleRequired("input[name='passportScan']", !isYes); // 👈 Делаем паспорт обязателен если нет е-резидента
         });
 
       document
