@@ -558,6 +558,19 @@
           toggleRequired("textarea[name='otherShareholders']", isNo);
         });
 
+      // 🔄 Сброс ошибок при выборе файла вручную
+      document
+        .querySelector("input[name='passportScan']")
+        .addEventListener("change", function () {
+          this.setCustomValidity("");
+        });
+
+      document
+        .querySelector("input[name='eresidencyCard']")
+        .addEventListener("change", function () {
+          this.setCustomValidity("");
+        });
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
