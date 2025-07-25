@@ -561,6 +561,37 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
+        // ⛔ Проверка обязательных активных file-полей вручную
+        const hasEResidency =
+          document.getElementById("hasEResidency").value === "Yes";
+        const passportUpload = document.getElementById("passport-upload");
+        const eresidencyUpload = document.getElementById("eresidency-upload");
+
+        if (!hasEResidency) {
+          const passportFile = form.querySelector("input[name='passportScan']");
+          if (
+            passportUpload &&
+            !passportUpload.classList.contains("hidden") &&
+            !passportFile.files.length
+          ) {
+            alert("❌ Please upload your passport or national ID.");
+            return;
+          }
+        } else {
+          const eresidencyFile = form.querySelector(
+            "input[name='eresidencyCard']"
+          );
+          if (
+            eresidencyUpload &&
+            !eresidencyUpload.classList.contains("hidden") &&
+            !eresidencyFile.files.length
+          ) {
+            alert("❌ Please upload your e-residency card.");
+            return;
+          }
+        }
+
+        // ✅ Всё ок — продолжаем отправку
         submitBtn.disabled = true;
         spinner.classList.remove("d-none");
 
@@ -579,7 +610,6 @@
         const MAX_FILE_SIZE_MB = 5;
         const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-        // ❌ Проверка размера всех файлов
         for (const input of fileInputs) {
           const file = input.files[0];
           if (file && file.size > MAX_FILE_SIZE) {
