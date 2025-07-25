@@ -99,7 +99,8 @@ function submitForm(data) {
 
   // 📧 Email админу
   MailApp.sendEmail({
-    to: "natalyabogdanovanatalya@gmail.com, office@e-consult.ee",
+    to: "natalyabogdanovanatalya@gmail.com",
+    // to: "natalyabogdanovanatalya@gmail.com, office@e-consult.ee",
     subject: `📝 New Questionnaire: ${data.fullName}`,
     body: `✅ A new questionnaire was submitted.\n\n📁 Folder link: ${newFolder.getUrl()}`,
   });
